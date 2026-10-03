@@ -61,9 +61,19 @@ public/certificates/  # Certificate documents shown in the gallery
 
 ## Scripts
 
-| Command         | Description                    |
-| --------------- | ------------------------------ |
+| Command         | Description                      |
+| --------------- | -------------------------------- |
 | `npm run dev`   | Start the dev server (Turbopack) |
-| `npm run build` | Production build               |
-| `npm start`     | Serve the production build     |
-| `npm run lint`  | Run ESLint                     |
+| `npm run build` | Production build (static export) |
+| `npm run lint`  | Run ESLint                       |
+
+## Deployment
+
+The site is configured for **static export** (`output: "export"` in
+`next.config.ts`) — `npm run build` emits plain HTML/CSS/JS into `./out`,
+which any static host can serve.
+
+On [Render](https://render.com) (Static Site):
+
+- **Build Command:** `npm install && npm run build`
+- **Publish Directory:** `out`
