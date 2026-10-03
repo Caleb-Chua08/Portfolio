@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Caleb Chua Yang Yang — Portfolio
+
+Engineering-drawing themed portfolio for a software & system engineer working on
+manufacturing software, machine integration, and data tracking. The whole site
+is styled like a set of engineering drawings — paper grid, hairline rules,
+title blocks, and numbered sheets.
+
+Built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS v4**, and **Zustand**.
+
+## Features
+
+- **Live sorting station** — a closed-loop PLC simulation running a real scan
+  cycle in the browser: sensors feed the ladder, the ladder decides, and the
+  machine obeys. Inject a defect and watch the reject pusher catch it.
+- **Control Room** (`/control-room`) — edit the ladder logic rung by rung,
+  step the scan, and inspect the generated C++ listing of the same logic.
+- **Drawing-sheet design language** — every section is a numbered sheet
+  (General Notes, As-Built Record, Foundation, Prototype Builds, Schedule,
+  Legend) with title-block headers and DWG numbering.
+- **Certifications gallery** — schedule table with document thumbnails; click
+  a thumbnail to open the certificate in a lightbox viewer with its verify link.
+- **Personal projects** — write-ups for SmartCopy (folder comparison & safe-copy
+  desktop app) and a Selenium automated testing framework, linked to GitHub.
+
+## Tech Stack
+
+| Layer     | Tool                                    |
+| --------- | --------------------------------------- |
+| Framework | [Next.js](https://nextjs.org) 16 (App Router) |
+| UI        | [React](https://react.dev) 19           |
+| Language  | [TypeScript](https://www.typescriptlang.org) |
+| Styling   | [Tailwind CSS](https://tailwindcss.com) v4 |
+| State     | [Zustand](https://zustand.docs.pmnd.rs) v5 (simulation store) |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the site.
+The simulation and control room run entirely client-side — no backend required.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/                  # App Router pages (/, /control-room) and global styles
+components/
+  layout/             # Header, Footer
+  sections/           # Hero, About, Experience, Education, Projects,
+                      # Certifications, Skills
+  machine/            # Live PLC sorting station simulation
+  control-room/       # Ladder editor, factory view, generated code view
+  scanrail/           # Shared scan-cycle rail visuals
+lib/
+  data/               # All page content (profile, experience, projects, certs, skills)
+  simulation/         # PLC engine: presets, scan evaluation, C++ codegen, store
+public/certificates/  # Certificate documents shown in the gallery
+```
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Command         | Description                    |
+| --------------- | ------------------------------ |
+| `npm run dev`   | Start the dev server (Turbopack) |
+| `npm run build` | Production build               |
+| `npm start`     | Serve the production build     |
+| `npm run lint`  | Run ESLint                     |
